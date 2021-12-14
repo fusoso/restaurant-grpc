@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "idv.edwin.restaurant";
+option java_outer_classname = "RestaurantProto";
+option objc_class_prefix = "R";
+
+package restaurant;
+
+// The request message containing pagination parameters.
+message FoodRequest {
+  int32 count = 1;
+  int32 offset = 2;
+}
+
+// The response message containing the list of food data
+message FoodResponse {
+  repeated Food foods = 1;
+}
+
+message Food {
+  int32 id = 1;
+  string name = 2;
+  string genre = 3;
+  int32 price = 4;
+  string cookingMethod = 5;
+}
+
+// The restaurant service definition.
+service RestaurantService {
+  // List all food data
+  rpc ListFoods(FoodRequest) returns (FoodResponse) {}
+}
